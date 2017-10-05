@@ -1,9 +1,9 @@
 FROM bamos/openface
 
-RUN pip install flask jsonschema
+RUN pip install flask jsonschema pymongo
 
 EXPOSE 5000
 
 COPY api.py /root/openface
 
-CMD python /root/openface/api.py
+CMD ["python", "-u", "/root/openface/api.py"]
