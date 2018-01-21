@@ -97,11 +97,14 @@ def compare():
   
   for user, imgBase64 in data['a'].iteritems():
     try:
-      data['a'][user] = getRep(imgBase64)
+      rep = getRep(imgBase64)
+      d = rep - imgs[0]
+      data['a'][user] = "{:0.3f}".format(np.dot(d, d))
     except Exception as e:
       errs.append(e.message)
+      print(e.message)
 
-  return "ok", 200
+  return jsonify(data['a']), 200
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080)
